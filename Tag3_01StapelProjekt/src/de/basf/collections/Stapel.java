@@ -12,7 +12,11 @@ public class Stapel {
 	private int index;
 	
 	public Stapel() {
-		data = new int[10];
+		this(10);
+	}
+	
+	public Stapel(int groesse) {
+		data = new int[groesse < 1 ? 10 : groesse];
 		index = 0;
 	}
 	
