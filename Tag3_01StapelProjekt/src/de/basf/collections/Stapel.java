@@ -8,8 +8,12 @@ package de.basf.collections;
  */
 public class Stapel {
 	
+	private int [] data;
+	private int index;
+	
 	public Stapel() {
-		
+		data = new int[10];
+		index = 0;
 	}
 	
 	/**
@@ -17,9 +21,8 @@ public class Stapel {
 	 * @param wert erwartet Teller ......
 	 */
 	public void push(int wert) {
-		/*
-		 * technische Hinweise für Produzent (Entwickler)
-		 */
+		if(isFull()) return;
+		data[index++] = wert;
 	}
 	
 	/**
@@ -27,14 +30,15 @@ public class Stapel {
 	 * @return gibt Teller zurück
 	 */
 	public int pop() {
-		return 0;
+		if(isEmpty()) return 0;
+		return data[--index];
 	}
 
 	public boolean isEmpty() {
-		return true; // zeileende
+		return index <= 0; 
 	}
 
 	public boolean isFull() {
-		return true;
+		return index >= data.length;
 	}
 }
