@@ -8,33 +8,44 @@ package de.basf.collections;
  */
 public class Stapel {
 	
-	private int [] data;
+	private Object [] data;
 	private int index;
 	
-	public Stapel() {
+	public Stapel() throws StapelException {
 		this(10);
+		
 	}
 	
-	public Stapel(int groesse) {
-		data = new int[groesse < 1 ? 10 : groesse];
-		index = 0;
+	public Stapel(int groesse) throws StapelException {
+		try {
+			data = new Object[groesse];// potenzieller Fehler // Fehler auslösen
+			index = 0;
+		} catch (Exception e) {
+			throw new StapelException("falsche Größe",e);
+		}
 	}
 	
 	/**
 	 * 
 	 * @param wert erwartet Teller ......
+	 * @throws StapelException 
 	 */
-	public void push(int wert) {
-		if(isFull()) return;
-		data[index++] = wert;
+	public void push(Object wert) throws StapelException {
+		
+		try {
+			data[index++] = wert;
+		} catch (Exception e) {
+			throw new StapelException("Overflow",e);
+		}
 	}
 	
 	/**
 	 * 
 	 * @return gibt Teller zurück
+	 * @throws StapelException 
 	 */
-	public int pop() {
-		if(isEmpty()) return 0;
+	public Object pop() throws StapelException {
+		if(isEmpty()) throw new StapelException("Underflow");
 		return data[--index];
 	}
 
